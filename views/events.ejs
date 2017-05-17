@@ -1,0 +1,71 @@
+
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Events | UF ACM</title>
+  <link rel="icon " type = "image/x-icon" href="img/icon.png"/>
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <!-- Font -->
+  <link href='https://fonts.googleapis.com/css?family=Roboto:100,100italic' rel='stylesheet' type='text/css'>
+  <!-- Script for nav -->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/bin/materialize.js"></script>
+  <script src="js/bin/moment.min.js"></script>
+  <script>
+
+  $(document).ready(function(){
+    $('.parallax').parallax();
+    $('select').material_select();
+    $(".button-collapse").sideNav();
+    $(".dropdown-button").dropdown();
+    $('.carousel').carousel();
+  });
+
+  </script>
+</head>
+
+<!-- navbar include directive  -->
+<% include navBar %>
+
+
+<body>
+  <div style="height:30%;  background-image: url('img/frenchfries.jpg'); position:relative; top:-75px; z-index:-1;">
+    <h1 class="header white-text">Events</h1>
+  </div>
+  <main>
+
+
+    <div class="container">
+      <h2 class="thin">Big Events</h2>
+
+
+
+      <div class="row">
+        <div class="col s12 m6 center">
+          <h3>Hackweek</h3>
+          <p>A weeklong event where our staff puts on numerous events to sharpen your technical edge. </p>
+        </div>
+        <div class="col s12 m6 center">
+          <h3>HSPC</h3>
+          <p>A High School programming competition</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="parallax-container">
+    <div class="parallax"><img src="img/hspc.jpg"></div>
+  </div>
+  <div class= "container">
+    <% include eventStream/eventstream %>
+  </div>
+
+  </main>
+
+  <!--  Scripts-->
+  <script src="js/bin/materialize.js"></script>
+</body>
+</html>
