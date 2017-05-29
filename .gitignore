@@ -1,24 +1,3 @@
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-
-pids
-logs
-results
-
-config/database.js
-config/secretDatabase.js
-config/secretAuth.js
-app/users.htpasswd
-app../pdfs
-localStorage/
-
-
 # Created by https://www.gitignore.io/api/linux,node,osx,windows,macos
 
 ### Linux ###
