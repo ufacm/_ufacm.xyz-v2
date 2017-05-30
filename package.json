@@ -1,0 +1,33 @@
+{
+  "name": "ufacm.xyz-v2",
+  "version": "2.0.0",
+  "description": "UFACM's webapp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "run": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ufacm/ufacm.xyz-v2.git"
+  },
+  "keywords": [
+    "acm",
+    "uf",
+    "florida"
+  ],
+  "author": "UFACM",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/ufacm/ufacm.xyz-v2/issues"
+  },
+  "homepage": "https://github.com/ufacm/ufacm.xyz-v2#readme",
+  "dependencies": {
+    "good": "^7.2.0",
+    "good-console": "^6.4.0",
+    "good-squeeze": "^5.0.2",
+    "habitat": "^3.1.2",
+    "hapi": "^16.2.0"
+  }
+}
