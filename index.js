@@ -6,8 +6,8 @@ const habitat = require('habitat');
 const Good = require('good');
 
 //setting environment variables
-habitat.load(`${__dirname}/process.env`, {host: 'localhost', port: 1337}); //process.env must be in 
-const env = new habitat('server', {host: 'localhost', port: '8080'});
+habitat.load(`${__dirname}/process.env`); //process.env must be in root directory
+const env = new habitat('server', {host: 'localhost', port: 8080});
 const SERVER_HOST = env.get('host');
 const SERVER_PORT = env.get('port');
 
@@ -55,5 +55,5 @@ server.start((err) => {
   if(err){
     throw err;
   }
-  console.log('Server running at ', server.info.uri);
+  console.log('Server running at', server.info.uri);
 });
