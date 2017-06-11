@@ -4,8 +4,14 @@ const Path = require('path');
 const Hapi = require('hapi');
 const habitat = require('habitat');
 const Good = require('good');
+const fs = require('fs');
 
 //setting environment variables
+fs.access(`${__dirname}/process.env`, fs.constants.R_OK, (err) => {
+  if(err){
+      console.log('Please make sure to set up your process.env file!');
+  }
+})
 habitat.load(`${__dirname}/process.env`); //process.env must be in root directory
 const env = new habitat('server', {host: 'localhost', port: 8080});
 const SERVER_HOST = env.get('host');
