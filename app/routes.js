@@ -1,11 +1,10 @@
-const register = function (server, options, next) {
+const register = (server, options, next) => {
 
     server.route({
         method: 'GET',
         path: '/',
-        handler: function (request, reply) {
-
-            return reply('ok');
+        handler: (request, reply) => {
+          reply.view('index');
         }
     });
 

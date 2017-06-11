@@ -1,6 +1,6 @@
 'use strict';
 
-const path = require('path');
+const Path = require('path');
 const Hapi = require('hapi');
 const habitat = require('habitat');
 const Good = require('good');
@@ -25,27 +25,38 @@ server.register({
 
 
 //registering good, good-squeeze, and good-console for server monitoring
-server.register({
-  register: Good,
-  options: {
-    reporters: {
-      console: [{
-        module: 'good-squeeze',
-        name: 'Squeeze',
-        args: [{
-          response: '*',
-          log: '*'
-        }]
-      }, {
-        module: 'good-console'
-      }, 'stdout']
-    }
-  }
-}, (err) => {
+server.register([
+  {
+    register: Good,
+    options: {
+      reporters: {
+        console: [{
+          module: 'good-squeeze',
+          name: 'Squeeze',
+          args: [{
+            response: '*',
+            log: '*'
+          }]
+        }, {
+          module: 'good-console'
+        }, 'stdout']
+      }
+    },
+  },
+  require('vision')
+], (err) => {
 
   if(err){
     throw err; //throw errors
   }
+
+  server.views({
+    engines: {
+      pug: require('pug')
+    },
+    relativeTo: __dirname,
+    path: 'views'
+  });
 
 });
 
