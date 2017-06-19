@@ -10,19 +10,19 @@ The UFACM webapp's objectives are to
 # Installation
 
 1. Install Node.js for your operating system
-2. Use nvm or n to change your Node.js version to 7.10.0
+2. Use nvm or n to change your Node.js version to 8.1.2
 
   ```
   (sudo) npm install -g nvm
-  nvm install 7.10.0
-  nvm use 7.10.0
+  nvm install 8.1.2
+  nvm use 8.1.2
   ```
 
   or
 
   ```
   (sudo) npm install -g n
-  (sudo) n 7.10.0
+  (sudo) n 8.1.2
   ```
 
 3. Clone this repo and change directories into it.
