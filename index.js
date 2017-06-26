@@ -11,7 +11,7 @@ fs.access(`${__dirname}/process.env`, fs.constants.R_OK, (err) => {
   if(err){
       console.log('Please make sure to set up your process.env file!');
   }
-})
+});
 habitat.load(`${__dirname}/process.env`); //process.env must be in root directory
 const env = new habitat('server', {host: 'localhost', port: 8080});
 const SERVER_HOST = env.get('host');
@@ -24,11 +24,15 @@ server.connection({
   port: SERVER_PORT || '8080'
 });
 
+// inert for static files
+server.register({
+    register: require('inert')
+});
+
 //routes
 server.register({
   register: require('./app/routes.js')
-})
-
+});
 
 //registering good, good-squeeze, and good-console for server monitoring
 server.register([
@@ -73,4 +77,5 @@ server.start((err) => {
     throw err;
   }
   console.log('Server running at', server.info.uri);
+
 });
