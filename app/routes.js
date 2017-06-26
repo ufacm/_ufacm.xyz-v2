@@ -7,7 +7,16 @@ const register = (server, options, next) => {
           reply.view('index');
         }
     });
-
+    
+    server.route({
+        method: 'GET',
+        path: '/{param*}',
+        handler: {
+            directory: {
+                path: 'views'
+            }
+        }
+    });
     return next();
 };
 

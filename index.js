@@ -24,11 +24,14 @@ server.connection({
   port: SERVER_PORT || '8080'
 });
 
+// inert for static files
+server.register({
+    register: require('inert')
+});
 //routes
 server.register({
   register: require('./app/routes.js')
-})
-
+});
 
 //registering good, good-squeeze, and good-console for server monitoring
 server.register([
