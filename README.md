@@ -55,25 +55,25 @@ The UFACM webapp's objectives are to
 
 ### High priority
 
-[ ] Complete frontend
-[ ] Get functioning database connection for users and events
-[ ] Get operating resume repo
-[ ] Make event sign in page
+- [ ] Complete frontend
+- [ ] Get functioning database connection for users and events
+- [ ] Get operating resume repo
+- [ ] Make event sign in page
 
 ### Others
 
-[ ] GitHub OAuth
-[ ] Tagging resumes
-[ ] User profiles
-[ ] SIG budget requester
-[ ] Event document repo
-[ ] Fishbowl reservation page (Google Calendar integration)
-[ ] Extensive testing
-[ ] Bernie's library checkout system
-[ ] Feedback form
-[ ] Newletter blaster
-[ ] MeetingMinutes meeting timer
-[ ] iptable configuration
-[ ] Text-to-speech Fishbowl reservation warning
-[ ] User management panel
+- [ ] GitHub OAuth
+- [ ] Tagging resumes
+- [ ] User profiles
+- [ ] SIG budget requester
+- [ ] Event document repo
+- [ ] Fishbowl reservation page (Google Calendar integration)
+- [ ] Extensive testing
+- [ ] Bernie's library checkout system
+- [ ] Feedback form
+- [ ] Newletter blaster
+- [ ] MeetingMinutes meeting timer
+- [ ] iptable configuration
+- [ ] Text-to-speech Fishbowl reservation warning
+- [ ] User management panel
 
