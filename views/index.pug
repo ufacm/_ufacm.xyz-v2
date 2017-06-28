@@ -14,7 +14,7 @@ html
         link(rel="stylesheet" href="css/style.css" media="screen")
         script(src="https://use.fontawesome.com/cb1f156474.js")
     body
-        // include navBar
+        include navBar
         .ink-flex
             .intro.column-group
                 .logo.all-50.push-center.push-middle
@@ -22,12 +22,12 @@ html
                     figcaption.ink-flex
                         .logo-caption.push-center.push-middle University of Florida
                         .buttons.push-right.logo-buttons
-                            // if user
-                                // button.ink-button.green.login Log In 
-                                // button.ink-button.blue.signup Sign Up
-                            // else
-                                // button.ink-button.green#profile-button Profile
-                                // button.ink-button.blue#logout-button Log Out
+                            if !user
+                                button.ink-button.green.login Log In
+                                button.ink-button.blue.signup Sign Up
+                            else
+                                button.ink-button.green#profile-button Profile
+                                button.ink-button.blue#logout-button Log Out
         .ink-grid
             section.who-what.column-group.horizontal-gutters
                 .who.all-50.tiny-100.small-100
@@ -75,7 +75,7 @@ html
     script(type="text/javascript" src="js/script.js")
     script.
         //Pull event stream
-        getEventStream();
+        //- getEventStream();
 
         $('.intro').css('height', ($(window).height() * .9 - $('nav').outerHeight()));
         if($(window).width()   < 823){
