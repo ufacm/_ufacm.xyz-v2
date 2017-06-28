@@ -26,10 +26,10 @@ The UFACM webapp's objectives are to
   ```
 
 3. Clone this repo and change directories into it.
-```
-git clone https://github.com/ufacm/ufacm.xyz-v2
-cd ufacm.xyz-v2
-```
+  ```
+  git clone https://github.com/ufacm/ufacm.xyz-v2
+  cd ufacm.xyz-v2
+  ```
 4. Run the following command to install all dependencies
   ```
   npm install
@@ -47,6 +47,33 @@ cd ufacm.xyz-v2
   npm start
   ```
 2. Your command line should print out the address to view the website.
-```
-Server running at http://localhost:8080
-```
+  ```
+  Server running at http://localhost:8080
+  ```
+
+## List of things to do
+
+### High priority
+
+[ ] Complete frontend
+[ ] Get functioning database connection for users and events
+[ ] Get operating resume repo
+[ ] Make event sign in page
+
+### Others
+
+[ ] GitHub OAuth
+[ ] Tagging resumes
+[ ] User profiles
+[ ] SIG budget requester
+[ ] Event document repo
+[ ] Fishbowl reservation page (Google Calendar integration)
+[ ] Extensive testing
+[ ] Bernie's library checkout system
+[ ] Feedback form
+[ ] Newletter blaster
+[ ] MeetingMinutes meeting timer
+[ ] iptable configuration
+[ ] Text-to-speech Fishbowl reservation warning
+[ ] User management panel
+
