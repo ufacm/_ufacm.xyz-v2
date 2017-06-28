@@ -25,6 +25,8 @@ The UFACM webapp's objectives are to
   (sudo) n 8.1.2
   ```
 
+  (Macs tend to be less strict about using sudo)
+
 3. Clone this repo and change directories into it.
   ```
   git clone https://github.com/ufacm/ufacm.xyz-v2
