@@ -78,4 +78,5 @@ The UFACM webapp's objectives are to
 - [ ] iptable configuration
 - [ ] Text-to-speech Fishbowl reservation warning
 - [ ] User management panel
+- [ ] Slack user creation
 
