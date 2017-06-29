@@ -79,3 +79,14 @@ The UFACM webapp's objectives are to
 - [ ] Text-to-speech Fishbowl reservation warning
 - [ ] User management panel
 
+### List of Pages to Build
+
+- [ ] Events
+- [ ] Contact us
+- [ ] Our Staff
+- [ ] SIGs
+- [ ] Login
+- [ ] Sign Up
+- [ ] User dashboard
+- [ ] User profile
+- [ ] Resume repo
