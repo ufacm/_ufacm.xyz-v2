@@ -4,7 +4,7 @@
   "description": "UFACM's webapp",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"We don't have tests yet\" && return 0",
     "start": "nodemon index.js",
     "run": "nodemon index.js"
   },

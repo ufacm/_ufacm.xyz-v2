@@ -80,3 +80,14 @@ The UFACM webapp's objectives are to
 - [ ] User management panel
 - [ ] Slack user creation
 
+### List of Pages to Build
+
+- [ ] Events
+- [ ] Contact us
+- [ ] Our Staff
+- [ ] SIGs
+- [ ] Login
+- [ ] Sign Up
+- [ ] User dashboard
+- [ ] User profile
+- [ ] Resume repo
