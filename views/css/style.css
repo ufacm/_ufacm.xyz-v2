@@ -52,6 +52,10 @@ button.fa-bars{
 	float: left;
 }
 
+#LSNo, #LSAlreadyOnIt{
+	margin-left: 5px;
+}
+
 /*homepage*/
 .intro{
 	background: #67daef; /* Old browsers */
