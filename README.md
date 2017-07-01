@@ -56,7 +56,7 @@ The UFACM webapp's objectives are to
   If you are using zsh, add the following to your `.zshrc`:
 
   ```
-  https://github.com/direnv/direnv
+  eval "$(direnv hook zsh)"
   ```
 
   Refer to the following for more information: [direnv](https://github.com/direnv/direnv)
