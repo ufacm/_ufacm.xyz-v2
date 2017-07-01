@@ -1,0 +1,16 @@
+.ink-shade.fade
+    .ink-modal.fade#loginModal(data-trigger=".login" data-width="80%" data-height="80%" role="dialog" aria-hidden="true" aria-labelled-by="login-title")
+        .modal-header
+            button.modal-close.ink-dismiss
+            h2#login-title Log In
+        .modal-body#loginContent
+            form.ink-form.ink-formvalidator#loginForm(method="post" action="/login")
+                .control-group.required
+                    label(for="e-mail") Email
+                    .control
+                        input#email(type="email" name="email" data-rules="required|email")
+                .control-group.required
+                    label(for="pass") Password
+                    .control
+                        input#password(type="password" name="password" data-rules="required")
+                input.ink-button.success#loginSub(type="submit" name="sub" value="Submit")
