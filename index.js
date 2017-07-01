@@ -7,7 +7,7 @@ const fs = require('fs');
 const mongoose = require('mongoose');
 
 // setting environment variables
-const config = require(`${__dirname}/config/${process.env.NODE_ENV}-globals`);
+const config = process.env.NODE_ENV ? require(`${__dirname}/config/${process.env.NODE_ENV}-globals`) : require(`${__dirname}/config/local-globals`);
 
 // creating the server with a host and port
 const server = new Hapi.Server();
