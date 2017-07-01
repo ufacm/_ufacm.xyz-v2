@@ -25,30 +25,67 @@ The UFACM webapp's objectives are to
   (sudo) n 8.1.2
   ```
 
-  (Macs tend to be less strict about using sudo)
+  (Macs tend to use sudo less)
 
 3. Clone this repo and change directories into it.
+
   ```
   git clone https://github.com/ufacm/ufacm.xyz-v2
   cd ufacm.xyz-v2
   ```
+  
 4. Run the following command to install all dependencies
+
   ```
   npm install
   ```
 
 ## Setup
-1. Duplicate the process.env.sample file and name it process.env. If you would like to use a specific IP address and/or port for development, change the values in this file. Otherwise leave the values as they are.
+1. Install direnv. This will vary upon your OS. For Homebrew on OS X/macOS, installation is:
+
   ```
-  cp process.env.sample process.env
+  brew install direnv
+  ```
+
+  For Ubuntu, use the following:
+
+  ```
+  sudo apt-get install direnv
+  ```
+
+  If you are using zsh, add the following to your `.zshrc`:
+
+  ```
+  https://github.com/direnv/direnv
+  ```
+
+  Refer to the following for more information: [direnv](https://github.com/direnv/direnv)
+  
+2. Duplicate the .envrc.sample file and name it .envrc. 
+
+  ```
+  cp .envrc.sample .envrc
+  ```
+
+3. Set the values in your `.envrc`. Most of these should be fine, but you will need to specify your own MongoDB. You can either host a sandbox on (mlab)[https://mlab.com/] or host a server on your machine. Ensure that you have write access to your database (i.e. do not make a read-only user).
+
+(I'll make a Dockerfile if I ever get around to it)
+
+4. Allow the file on direnv
+
+  ```
+  direnv allow
   ```
 
 ## Starting the server
 1. Run the following command
+
   ```
   npm start
   ```
+
 2. Your command line should print out the address to view the website.
+
   ```
   Server running at http://localhost:8080
   ```

@@ -2,27 +2,22 @@
 
 const Path = require('path');
 const Hapi = require('hapi');
-const habitat = require('habitat');
 const Good = require('good');
 const fs = require('fs');
+const mongoose = require('mongoose');
 
-//setting environment variables
-fs.access(`${__dirname}/process.env`, fs.constants.R_OK, (err) => {
-  if(err){
-      console.log('Please make sure to set up your process.env file!');
-  }
-});
-habitat.load(`${__dirname}/process.env`); //process.env must be in root directory
-const env = new habitat('server', {host: 'localhost', port: 8080});
-const SERVER_HOST = env.get('host');
-const SERVER_PORT = env.get('port');
+// setting environment variables
+const config = require(`${__dirname}/config/${process.env.NODE_ENV}-globals`);
 
-//creating the server with a host and port
+// creating the server with a host and port
 const server = new Hapi.Server();
 server.connection({
-  host: SERVER_HOST || 'localhost',
-  port: SERVER_PORT || '8080'
+  host: config.server.host || 'localhost',
+  port: config.server.port || '8080'
 });
+
+// connect to database
+mongoose.connect(config.mongo.uri, { useMongoClient: true });
 
 // inert for static files
 server.register({
@@ -65,7 +60,10 @@ server.register([
       pug: require('pug')
     },
     relativeTo: __dirname,
-    path: 'views'
+    path: 'views',
+    compileOptions: {
+        pretty: true
+    }
   });
 
 });
