@@ -41,6 +41,7 @@ The UFACM webapp's objectives are to
   ```
 
 ## Setup
+
 1. Install direnv. This will vary upon your OS. For Homebrew on OS X/macOS, use the following:
 
   ```
@@ -82,6 +83,8 @@ The UFACM webapp's objectives are to
   ```
   direnv allow
   ```
+
+(sorry Windows users, but I have no idea how to do any of the above for Windows. Just modify `config/local-globals.js` to set your variables, I guess.)
 
 ## Starting the server
 1. Run the following command
