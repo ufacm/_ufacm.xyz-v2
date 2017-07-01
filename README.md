@@ -53,6 +53,12 @@ The UFACM webapp's objectives are to
   sudo apt-get install direnv
   ```
 
+  If you are using bash, add the following to your `.bashrc`:
+
+  ```
+  eval "$(direnv hook bash)"
+  ```
+
   If you are using zsh, add the following to your `.zshrc`:
 
   ```
