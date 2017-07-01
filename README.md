@@ -41,7 +41,7 @@ The UFACM webapp's objectives are to
   ```
 
 ## Setup
-1. Install direnv. This will vary upon your OS. For Homebrew on OS X/macOS, installation is:
+1. Install direnv. This will vary upon your OS. For Homebrew on OS X/macOS, use the following:
 
   ```
   brew install direnv
