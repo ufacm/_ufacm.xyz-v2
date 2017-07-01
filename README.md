@@ -74,7 +74,7 @@ The UFACM webapp's objectives are to
   cp .envrc.sample .envrc
   ```
 
-3. Set the values in your `.envrc`. Most of these should be fine, but you will need to specify your own MongoDB. You can either host a sandbox on (mlab)[https://mlab.com/] or host a server on your machine. Ensure that you have write access to your database (i.e. do not make a read-only user).
+3. Set the values in your `.envrc`. Most of these should be fine, but you will need to specify your own MongoDB. You can either host a sandbox on [mlab](https://mlab.com/) or host a server on your machine. Ensure that you have write access to your database (i.e. do not make a read-only user).
 
 (I'll make a Dockerfile if I ever get around to it)
 
