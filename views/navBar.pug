@@ -39,11 +39,11 @@
                     p.label Would you like to be put on the ACM list serve?
                     ul.control.unstyled
                         li
-                            input#LSYes(type="radio" name="listServe" value="true")
+                            input#LSYes(type="radio" class="SignUpButtonFix" name="listServe" value="true")
                             label(for="rb1") Yes
-                            input#LSNo(type="radio" name="listServe" value="false")
+                            input#LSNo(type="radio" class="SignUpButtonFix" name="listServe" value="false")
                             label(for="rb2") No
-                            input#LSAlreadyOnIt(type="radio" name="listServe" value="true")
+                            input#LSAlreadyOnIt(type="radio" class="SignUpButtonFix" name="listServe" value="true")
                             label(for="rb3") Already on it!
                 .column-group.gutters
                     .control-group.required.all-50
@@ -69,7 +69,7 @@ nav.ink-navigation.ink-sticky
             li
                 a(href="/contact") Our Staff
             li
-                a(href="/sigs") SIGS 
+                a(href="/sigs") SIGS
             li
                 a(href="https://www.facebook.com/ufacm/" target="_blank")
                     i.fa.fa-facebook.fa-lg(aria-hidden="true")
