@@ -52,7 +52,7 @@ button.fa-bars{
 	float: left;
 }
 
-#LSNo, #LSAlreadyOnIt{
+.SignUpButtonFix{
 	margin-left: 5px;
 }
 
