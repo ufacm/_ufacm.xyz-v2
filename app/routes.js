@@ -1,113 +1,120 @@
-var express = require("express");
 const register = (server, options, next) => {
 
-  // Events
-  //  Contact us
-  //  Our Staff
-  //  SIGs
-  //  Login
-  //  Sign Up
-  //  User dashboard
-  //  User profile
-  //  Resume repo
+    //  Events
+    //  Contact us
+    //  Our Staff
+    //  SIGs
+    //  Login
+    //  Sign Up
+    //  User dashboard
+    //  User profile
+    //  Resume repo
 
-  server.route({
-    method: 'GET',
-    path: '/',
-    handler: (request, reply) => {
-      reply.view('index');
-    }
-  });
-
-  server.route({
-    method: 'GET',
-    path: '/{param*}',
-    handler: {
-      directory: {
-        path: 'views'
+    server.route.push({
+      method: 'GET',
+      path: '/',
+      handler: (request, reply) => {
+        reply.view('index');
       }
-    }
-  });
+    });
 
-  server.route({
-    method: 'GET',
-    path: '/events',
-    handler: function(request, reply) {
-      reply("hi")
-      console.log("events");
-    }
-  });
+    server.route.push({
+      method: 'GET',
+      path: '/{param*}',
+      handler: {
+        directory: {
+          path: 'views'
+        }
+      }
+    });
 
-  server.route({
-    method: 'GET',
-    path: '/contactus',
-    handler: function(request, reply) {
-      console.log("contactus");
-    }
-  });
+    server.route.push({
+        method: 'GET',
+        path: '/events',
+        handler: function(request, reply) {
+          console.log("events");
+          return reply.view('events');
+        }
+      };
 
-  server.route({
-    method: 'GET',
-    path: '/ourstaff',
-    handler: function(request, reply) {
-      console.log("contactus");
-    }
-  });
+      server.route.push({
+        method: 'GET',
+        path: '/contactus',
+        handler: function(request, reply) {
+          console.log("contactus");
+          return reply.view('contactus');
+        }
+      });
 
-  server.route({
-    method: 'GET',
-    path: '/sigs',
-    handler: function(request, reply) {
-      console.log("sigs");
-    }
-  });
+      server.route.push({
+        method: 'GET',
+        path: '/ourstaff',
+        handler: function(request, reply) {
+          console.log("ourstaff");
+          return reply.view('ourstaff');
+        }
+      });
 
-  server.route({
-    method: 'GET',
-    path: '/login',
-    handler: function(request, reply) {
-      console.log("login");
-    }
-  });
+      server.route.push({
+        method: 'GET',
+        path: '/sigs',
+        handler: function(request, reply) {
+          console.log("sigs");
+          return reply.view('sigs');
+        }
+      });
 
-  server.route({
-    method: 'GET',
-    path: '/signup',
-    handler: function(request, reply) {
-      console.log("signup");
-    }
-  });
+      server.route.push({
+        method: 'GET',
+        path: '/login',
+        handler: function(request, reply) {
+          console.log("login");
+          return reply.view('login');
+        }
+      });
 
-  server.route({
-    method: 'GET',
-    path: '/user/',
-    handler: function(request, reply) {
-      console.log("user");
-    }
-  });
+      server.route.push({
+        method: 'GET',
+        path: '/signup',
+        handler: function(request, reply) {
+          console.log("signup");
+          return reply.view('signup');
+        }
+      });
 
-  server.route({
-    method: 'GET',
-    path: '/resumerepo',
-    handler: function(request, reply) {
-      console.log("resumerepo");
-    }
-  });
+      server.route.push({
+        method: 'GET',
+        path: '/user/',
+        handler: function(request, reply) {
+          console.log("user");
+          return reply.view('user');
+        }
+      });
 
-  server.route({
-    method: 'GET',
-    path: '/user/profile',
-    handler: function(request, reply) {
-      console.log("contactus");
-    }
-  });
+      server.route.push({
+        method: 'GET',
+        path: '/resumerepo',
+        handler: function(request, reply) {
+          console.log("resumerepo");
+          return reply.view('resumerepo');
+        }
+      });
 
-  return next();
-};
+      server.route.push({
+        method: 'GET',
+        path: '/user/profile',
+        handler: function(request, reply) {
+          console.log("profile");
+          return reply.view('profile');
+        }
+      });
 
-register.attributes = {
-  name: 'UFACM routes',
-  version: '1.0.0'
-};
+      return next();
+    };
 
-module.exports = register;
+    register.attributes = {
+      name: 'UFACM routes',
+      version: '1.0.0'
+    };
+
+    module.exports = register;
