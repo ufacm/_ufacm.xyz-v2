@@ -7,7 +7,15 @@ const register = (server, options, next) => {
           reply.view('index');
         }
     });
-    
+
+    server.route({
+        method: 'GET',
+        path: '/sigs',
+        handler: (request, reply) => {
+          reply.view('sigs');
+        }
+    });
+
     server.route({
         method: 'GET',
         path: '/{param*}',
