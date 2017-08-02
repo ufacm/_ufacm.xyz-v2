@@ -12,7 +12,7 @@ const register = (server, options, next) => {
         method: 'GET',
         path: '/sigs',
         handler: (request, reply) => {
-          reply.view('sigs');
+          reply.view('sigsTemp');
         }
     });
 
