@@ -34,6 +34,8 @@
     "pug": "^2.0.0-rc.2",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
+    "sequelize": "^4.4.2",
+    "sqlite3": "^3.1.9",
     "vision": "^4.1.1"
   },
   "devDependencies": {
