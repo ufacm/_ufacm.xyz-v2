@@ -1,5 +1,25 @@
 const rp = require('request-promise');
+const Sequelize = require('sequelize');
+const bcrypt = require('bcrypt');
 
+const config = process.env.NODE_ENV ? require(`../config/${process.env.NODE_ENV}-globals`) : require(`${__dirname}/config/local-globals`);
+
+// connect to database
+// TODO: do this as a hapi plugin
+const db = new Sequelize({
+    dialect: 'sqlite',
+    storage: `${config.db.path}.db`
+});
+
+db.authenticate()
+    .then(() => {
+        console.log('Connected to database');
+    })
+    .catch(() => {
+        console.log('Unable to connect to database');
+    });
+
+const User = db.define('users', require('../common/models/User'));
 const register = (server, options, next) => {
 
     server.route({
@@ -54,6 +74,48 @@ const register = (server, options, next) => {
             }
         }
     });
+
+    server.route({
+        method: 'POST',
+        path: '/signup',
+        handler: (request, reply) => {
+            console.log(request.payload);
+            let {
+                firstName,
+                lastName,
+                email
+            } = request.payload;
+
+            let ufid = request.payload.UFID;
+            let sendNewsletter = request.payload.listServe;
+            let plainPassword = request.payload.password;
+            let passwordHash;
+
+            console.log(plainPassword);
+
+            bcrypt.hash(plainPassword, 10, (err, hash) => {
+                passwordHash = hash;
+                const newUser = {
+                    firstName,
+                    lastName,
+                    email,
+                    ufid,
+                    sendNewsletter,
+                    password: passwordHash
+                }
+
+                User.findOrCreate({where: newUser})
+                .spread((user, created) => {
+                    console.log('user:', user.get({
+                        plain: true
+                    }));
+                    console.log('created:', created);
+                })
+            });
+
+            reply.response('cool');
+        }
+    })
 
     return next();
 };

@@ -4,7 +4,7 @@ const Path = require('path');
 const Hapi = require('hapi');
 const Good = require('good');
 const fs = require('fs');
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize');
 
 // setting environment variables
 const config = process.env.NODE_ENV ? require(`${__dirname}/config/${process.env.NODE_ENV}-globals`) : require(`${__dirname}/config/local-globals`);
@@ -15,9 +15,6 @@ server.connection({
   host: config.server.host || 'localhost',
   port: config.server.port || '8080'
 });
-
-// connect to database
-mongoose.connect(config.mongo.uri, { useMongoClient: true });
 
 // inert for static files
 server.register({

@@ -465,3 +465,6 @@ __pycache__/
 package-lock.json
 .envrc
 *.tern-port
+
+# Database
+*.db
