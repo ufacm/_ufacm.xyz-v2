@@ -1,32 +1,33 @@
-const Sequelize = require('sequelize');
-
-module.exports = {
-    firstName: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    lastName: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    email: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    password: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    sendNewsletter: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false
-    },
-    ufid: {
-        type: Sequelize.STRING,
-        primaryKey: true
-    },
-    admin: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
-    }
+module.exports = (db, DataTypes) => {
+    return db.define('users', {
+        firstName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        lastName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        sendNewsletter: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+        ufid: {
+            type: DataTypes.STRING,
+            primaryKey: true
+        },
+        admin: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        }
+    });
 }
+

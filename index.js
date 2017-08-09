@@ -1,76 +1,87 @@
 'use strict';
 
-const Path = require('path');
+const Config = require('getconfig');
 const Hapi = require('hapi');
-const Good = require('good');
 const fs = require('fs');
 const Sequelize = require('sequelize');
 
-// setting environment variables
-const config = process.env.NODE_ENV ? require(`${__dirname}/config/${process.env.NODE_ENV}-globals`) : require(`${__dirname}/config/local-globals`);
-
-// creating the server with a host and port
+// Creating the server with a host and port
 const server = new Hapi.Server();
 server.connection({
-  host: config.server.host || 'localhost',
-  port: config.server.port || '8080'
+  host: Config.server.host || 'localhost',
+  port: Config.server.port || '8080'
 });
 
-// inert for static files
-server.register({
-    register: require('inert')
-});
-
-//routes
-server.register({
-  register: require('./app/routes.js')
-});
-
-//registering good, good-squeeze, and good-console for server monitoring
-server.register([
-  {
-    register: Good,
-    options: {
-      reporters: {
-        console: [{
-          module: 'good-squeeze',
-          name: 'Squeeze',
-          args: [{
-            response: '*',
-            log: '*'
-          }]
-        }, {
-          module: 'good-console'
-        }, 'stdout']
-      }
+// Creating array of plugins
+const plugins = [
+    require('inert'), // static files
+    require('vision'), // template rendering
+    require('./app/routes.js'), // routes
+    {
+        register: require('good'), // logging
+        options: {
+            reporters: {
+                console: [{
+                    module: 'good-squeeze',
+                    name: 'Squeeze',
+                    args: [{
+                        response: '*',
+                        log: '*'
+                    }]
+                }, {
+                    module: 'good-console'
+                }, 'stdout']
+            }
+        },
     },
-  },
-  require('vision')
-], (err) => {
-
-  if(err){
-    throw err; //throw errors
-  }
-
-  server.views({
-    engines: {
-      pug: require('pug')
-    },
-    relativeTo: __dirname,
-    path: 'views',
-    compileOptions: {
-        pretty: true
+    {
+        register: require('hapi-sequelize'), // database
+        options: [
+            {
+                name: 'acm', // identifier
+                models: ['./common/models/**/*.js'],  // paths/globs to model files
+                sequelize: new Sequelize({
+                    dialect: 'sqlite',
+                    storage: `${Config.db.path}.db`
+                }), // sequelize instance
+                sync: true, // sync models - default false
+                forceSync: false, // force sync (drops tables) - default false
+                // onConnect: function (database) { // Optional
+                // // migrations, seeders, etc.
+                // }
+            }
+        ]
     }
-  });
+];
 
+// Plugin registration
+server.register(plugins, (err) => {
+
+    if (err) {
+        throw err;
+    }
+
+    // Set up template rendering
+    server.views({
+        engines: {
+            pug: require('pug')
+        },
+        relativeTo: __dirname,
+        path: 'views',
+        compileOptions: {
+            pretty: true
+        },
+        isCached: Config.getconfig.env === 'production'
+    });
+
+    // Start server
+    server.start((err) => {
+
+        if(err){
+            throw err;
+        }
+        console.log('Server running at', server.info.uri);
+
+    });
 });
 
-//start server
-server.start((err) => {
-
-  if(err){
-    throw err;
-  }
-  console.log('Server running at', server.info.uri);
-
-});

@@ -1,0 +1,9 @@
+{
+    "server": {
+        "host": "$SERVER_HOST",
+        "port": "$SERVER_PORT"
+    },
+    "db": {
+        "path": "$DB_PATH"
+    }
+}
