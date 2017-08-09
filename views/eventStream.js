@@ -44,15 +44,12 @@ class eventStream {
         single_event
       } < /div>;
     }
-  });
+  }); <
+  eventBox >
 
-
-
-  ReactDOM.render( < eventBox hasvacancy = getEvents();
-    />,
-    document.getElementById('container')
-  );
-
-
+    ReactDOM.render( < eventBox events = getEvents();
+      />,
+      document.getElementById('container')
+    );
 
 }
