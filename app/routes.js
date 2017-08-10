@@ -1,4 +1,5 @@
 var express = require("express");
+const eventStream = require('../views/eventStream.js');
 const register = (server, options, next) => {
 
   // Events
@@ -33,6 +34,10 @@ const register = (server, options, next) => {
     method: 'GET',
     path: '/events',
     handler: function(request, reply) {
+      events = new eventStream();
+      events.getEvents().then((res, rej)=>{
+        reply(res);
+      })
       reply("hi")
       console.log("events");
     }

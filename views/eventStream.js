@@ -3,7 +3,15 @@ var request = require('request');
 
 class eventStream {
   constructor() {
-    this.events = new Set[];
+    this.returnedEvents = null;
+    getEvents().then((res, rej) => {
+      if(res){
+        this.returnedEvents=res;
+      }
+      else{
+        console.log("eventStream->Error->trouble with returned events " + rej)
+      }
+    })
   }
 
   getEvents() {
@@ -31,7 +39,7 @@ class eventStream {
         var title = this.props.events.name;
         var description = this.props.events.description;
         var coverPhoto = this.props.events.photos;
-        var single_event = {
+        var all_events = {
           place: place,
           startTime: startTime,
           endTime: endTime,
@@ -40,16 +48,11 @@ class eventStream {
           coverPhoto: coverPhoto,
         }
       }
-      return <div > {
-        single_event
-      } < /div>;
+      return <div > all_events</div>
     }
   }); <
   eventBox >
-
-    ReactDOM.render( < eventBox events = getEvents();
-      />,
-      document.getElementById('container')
-    );
-
 }
+
+    
+
