@@ -1,5 +1,8 @@
+const Joi = require('joi');
+const Boom = require('boom');
 const rp = require('request-promise');
 const bcrypt = require('bcrypt');
+const uuidGen = require('uuid/v4');
 
 const register = (server, options, next) => {
 
@@ -96,6 +99,64 @@ const register = (server, options, next) => {
 
             reply.response('cool');
         }
+    });
+
+    server.route({
+        method: 'POST',
+        path: '/login',
+        config: {
+            validate: {
+                payload: {
+                    email: Joi.string().email().required(),
+                    password: Joi.string().min(2).max(200).required(),
+                    sub: Joi.string()
+                }
+            },
+            auth: false,
+            handler: (request, reply) => {
+                if (request.auth.isAuthenticated) {
+                    return reply.redirect('/profile');
+                }
+
+                const reqUser = request.payload;
+                const uuid = uuidGen();
+
+                if (!reqUser.username || !reqUser.password) {
+                    return reply('Missing username or password');
+                }
+
+                getUser(request, reqUser.email)
+                    .then((user) => {
+                        if (user && bcrypt.compareSync(reqUser.password, user.dataValues.password)) {
+                            request.cookieAuth.set(user);
+                            console.log(request.cookieAuth.reply());
+                            return reply('Login Successful!');
+                        } else {
+                            return reply(Boom.unauthorized('Incorrect email or password'));
+                        }
+                    })
+                    .catch ((err) => {
+                        console.log(err);
+                        return reply(Boom.badImplementation());
+                    });
+
+                // const reqUser = request.payload;
+                // getUser(request, reqUser.email)
+                    // .then((user) => {
+                        // if (user && bcrypt.compareSync(reqUser.password, user.dataValues.password)) {
+                            // request.cookieAuth.set(user);
+                            // console.log(request.cookieAuth.reply());
+                            // return reply('Login Successful!');
+                        // } else {
+                            // return reply(Boom.unauthorized('Incorrect email or password'));
+                        // }
+                    // })
+                    // .catch ((err) => {
+                        // console.log(err);
+                        // return reply(Boom.badImplementation());
+                    // });
+            }
+        },
     })
 
     return next();
@@ -107,3 +168,11 @@ register.attributes = {
 };
 
 module.exports = register;
+
+function getUser (request, email) {
+    return request.getDb('acm').models.users.findOne({
+        where: {
+            email
+        }
+    });
+}

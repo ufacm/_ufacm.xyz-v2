@@ -16,6 +16,7 @@ server.connection({
 const plugins = [
     require('inert'), // static files
     require('vision'), // template rendering
+    require('hapi-auth-cookie'), // authentication
     require('./app/routes.js'), // routes
     {
         register: require('good'), // logging
@@ -73,6 +74,16 @@ server.register(plugins, (err) => {
         },
         isCached: Config.getconfig.env === 'production'
     });
+
+    // Set up auth
+    server.auth.strategy('base', 'cookie', {
+        password: 'acmisbombacmisbombacmisbombacmisbombacmisbombacmisbombacmisbombacmisbombacmisbomb',
+        cookie: 'app-cookie',
+        ttl: 24 * 60 * 60 * 1000
+    });
+
+    // Set default auth strategy
+    server.auth.default('base');
 
     // Start server
     server.start((err) => {

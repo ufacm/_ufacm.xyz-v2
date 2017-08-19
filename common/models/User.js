@@ -21,8 +21,7 @@ module.exports = (db, DataTypes) => {
             allowNull: false
         },
         ufid: {
-            type: DataTypes.STRING,
-            primaryKey: true
+            type: DataTypes.STRING
         },
         admin: {
             type: DataTypes.BOOLEAN,
