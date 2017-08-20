@@ -1,11 +1,22 @@
 language: node_js
-dist: trusty
 node_js:
-- 8.1.0
+  - 6
+matrix:
+  fast_finish: true
+  allow_failures:
+    - node_js: 5.12.0
+before_script:
+  - npm install -g gulp-cli node-gyp
+  - gem install sass
+services: mongodb
 cache:
   directories:
-  - node_modules
-notifications:
-  email: false
-  slack:
-    secure: ite6OhD1xXrpwfNRotvg8GGyHg4MOSHaSriF3Fs29EBteeG7z9PKT7rRGNAhnMc6D3qR2cNmVK7DOVVOWuACuL4NYbQ4qdJ4jBl63geW3BVxz5yr9evs7t6HKHtrkoBc79vGERldZPDKTmHV6qbxF6PocgMRGs+igN0JLAZrmdd2hz3lyLYflwN4F/RZh5qYBBa3hxUsUMbhxnSbynWj8U6FDxqkQrLGUc7qX23fVSbJUQ4q5GEBevLXIwCeQO63ne3DEr6C6JovmxVIY5zEy8wFTAQhUvo0JQ/3Vm567PW8OL6R+HK0kIsGSoxy/71+xc1ZSuczNXWm9uCWBzAJ5HS9yFP01yG8s9sw68fkMmdVGRQ5YRoSGNjXQA/IrL5zhD1Ogc0wVBCcuwMByP324hrUde9KVPxR+xrSddbgexe4WUG4iVlY/X4afrIXrHM4e0H7OcNTwEkONs2T2IOhW0u79Cn4GiJIddQY9DlQ2bN2QAv47l1coAoi6laLsKgT+ljrv6qEvUiI0qSfzALvptNJ2InzGmn5NdNDHpijDDioE81Xm+fgk2HyI9Ez7LKLiRjmMeNvITWOUKJntEmcAFHRtwKXxIa5AypbOTmDrGG3Kxoa7lfuwt/g+hHcPQNdS2jDkoCxFrlkazU+9zeRv8eMWgD7GHgsCSDvQeADzNM=
+    - node_modules
+env:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
