@@ -11,8 +11,8 @@
             University of Florida
           </div>
           <div class="col-sm-4">
-            <a class="btn btn-default" ui-sref="signup">Sign Up</a>
-            <a class="btn btn-default" ui-sref="login">Login</a>
+            <a class="btn btn-default" ui-sref="signup" width="50%">Sign Up</a>
+            <a class="btn btn-default" ui-sref="login" width="50%">Login</a>
           </div>
         </div>
       </div>
