@@ -1,7 +1,7 @@
 'use strict';
 
 var config = browser.params;
-var UserModel = require(config.serverConfig.root + '/server/sqldb').User;
+var UserModel = require(config.serverConfig.root + '/server/api/user/user.model').default;
 
 describe('Logout View', function() {
   var login = function(user) {
@@ -18,7 +18,7 @@ describe('Logout View', function() {
 
   beforeEach(function() {
     return UserModel
-      .destroy({ where: {} })
+      .remove()
       .then(function() {
         return UserModel.create(testUser);
       })
@@ -28,7 +28,7 @@ describe('Logout View', function() {
   });
 
   after(function() {
-    return UserModel.destroy({ where: {} });
+    return UserModel.remove();
   })
 
   describe('with local auth', function() {

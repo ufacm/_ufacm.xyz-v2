@@ -5,10 +5,18 @@
 'use strict';
 
 import express from 'express';
-import sqldb from './sqldb';
+import mongoose from 'mongoose';
+mongoose.Promise = require('bluebird');
 import config from './config/environment';
 import http from 'http';
 import seedDatabaseIfNeeded from './config/seed';
+
+// Connect to MongoDB
+mongoose.connect(config.mongo.uri, config.mongo.options);
+mongoose.connection.on('error', function(err) {
+  console.error(`MongoDB connection error: ${err}`);
+  process.exit(-1); // eslint-disable-line no-process-exit
+});
 
 // Setup server
 var app = express();
@@ -28,12 +36,8 @@ function startServer() {
   });
 }
 
-sqldb.sequelize.sync()
-  .then(seedDatabaseIfNeeded)
-  .then(startServer)
-  .catch(function(err) {
-    console.log('Server failed to start due to error: %s', err);
-  });
+seedDatabaseIfNeeded();
+setImmediate(startServer);
 
 // Expose app
 exports = module.exports = app;

@@ -4,17 +4,15 @@
  */
 
 'use strict';
-import sqldb from '../sqldb';
+import Thing from '../api/thing/thing.model';
+import User from '../api/user/user.model';
 import config from './environment/';
 
 export default function seedDatabaseIfNeeded() {
   if(config.seedDB) {
-    let Thing = sqldb.Thing;
-    let User = sqldb.User;
-
-    return Thing.destroy({ where: {} })
+    Thing.find({}).remove()
       .then(() => {
-        let thing = Thing.bulkCreate([{
+        let thing = Thing.create({
           name: 'Development Tools',
           info: 'Integration with popular tools such as Webpack, Gulp, Babel, TypeScript, Karma, '
                 + 'Mocha, ESLint, Node Inspector, Livereload, Protractor, Pug, '
@@ -41,26 +39,28 @@ export default function seedDatabaseIfNeeded() {
           name: 'Deployment Ready',
           info: 'Easily deploy your app to Heroku or Openshift with the heroku '
                 + 'and openshift subgenerators'
-        }]);
+        });
         return thing;
       })
       .then(() => console.log('finished populating things'))
       .catch(err => console.log('error populating things', err));
 
-    User.destroy({ where: {} })
-      .then(() => User.bulkCreate([{
-        provider: 'local',
-        name: 'Test User',
-        email: 'test@example.com',
-        password: 'test'
-      }, {
-        provider: 'local',
-        role: 'admin',
-        name: 'Admin',
-        email: 'admin@example.com',
-        password: 'admin'
-      }])
+    User.find({}).remove()
+      .then(() => {
+        User.create({
+          provider: 'local',
+          name: 'Test User',
+          email: 'test@example.com',
+          password: 'test'
+        }, {
+          provider: 'local',
+          role: 'admin',
+          name: 'Admin',
+          email: 'admin@example.com',
+          password: 'admin'
+        })
         .then(() => console.log('finished populating users'))
-        .catch(err => console.log('error populating users', err)));
+        .catch(err => console.log('error populating users', err));
+      });
   }
 }

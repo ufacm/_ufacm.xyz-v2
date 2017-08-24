@@ -1,10 +1,10 @@
 'use strict';
 
 import app from '../..';
-import {User} from '../../sqldb';
+import User from './user.model';
 var user;
 var genUser = function() {
-  user = User.build({
+  user = new User({
     provider: 'local',
     name: 'Fake User',
     email: 'test@example.com',
@@ -15,10 +15,8 @@ var genUser = function() {
 
 describe('User Model', function() {
   before(function() {
-    // Sync and clear users before testing
-    return User.sync().then(function() {
-      return User.destroy({ where: {} });
-    });
+    // Clear users before testing
+    return User.remove();
   });
 
   beforeEach(function() {
@@ -26,11 +24,11 @@ describe('User Model', function() {
   });
 
   afterEach(function() {
-    return User.destroy({ where: {} });
+    return User.remove();
   });
 
   it('should begin with no users', function() {
-    return User.findAll().should
+    return User.find({}).exec().should
       .eventually.have.length(0);
   });
 
@@ -43,31 +41,102 @@ describe('User Model', function() {
   });
 
   describe('#email', function() {
-    it('should fail when saving without an email', function() {
+    it('should fail when saving with a blank email', function() {
       user.email = '';
       return user.save().should.be.rejected;
+    });
+
+    it('should fail when saving with a null email', function() {
+      user.email = null;
+      return user.save().should.be.rejected;
+    });
+
+    it('should fail when saving without an email', function() {
+      user.email = undefined;
+      return user.save().should.be.rejected;
+    });
+
+    describe('given user provider is facebook', function() {
+      beforeEach(function() {
+        user.provider = 'facebook';
+      });
+
+      it('should succeed when saving without an email', function() {
+        user.email = null;
+        return user.save().should.be.fulfilled;
+      });
+    });
+
+    describe('given user provider is github', function() {
+      beforeEach(function() {
+        user.provider = 'github';
+      });
+
+      it('should succeed when saving without an email', function() {
+        user.email = null;
+        return user.save().should.be.fulfilled;
+      });
     });
   });
 
   describe('#password', function() {
-    beforeEach(function() {
-      return user.save();
+    it('should fail when saving with a blank password', function() {
+      user.password = '';
+      return user.save().should.be.rejected;
     });
 
-    it('should authenticate user if valid', function() {
-      user.authenticate('password').should.be.true;
+    it('should fail when saving with a null password', function() {
+      user.password = null;
+      return user.save().should.be.rejected;
     });
 
-    it('should not authenticate user if invalid', function() {
-      user.authenticate('blah').should.not.be.true;
+    it('should fail when saving without a password', function() {
+      user.password = undefined;
+      return user.save().should.be.rejected;
     });
 
-    it('should remain the same hash unless the password is updated', function() {
-      user.name = 'Test User';
-      return user.save()
-        .then(function(u) {
-          return u.authenticate('password');
-        }).should.eventually.be.true;
+    describe('given the user has been previously saved', function() {
+      beforeEach(function() {
+        return user.save();
+      });
+
+      it('should authenticate user if valid', function() {
+        user.authenticate('password').should.be.true;
+      });
+
+      it('should not authenticate user if invalid', function() {
+        user.authenticate('blah').should.not.be.true;
+      });
+
+      it('should remain the same hash unless the password is updated', function() {
+        user.name = 'Test User';
+        return user.save()
+          .then(function(u) {
+            return u.authenticate('password');
+          }).should.eventually.be.true;
+      });
+    });
+
+    describe('given user provider is facebook', function() {
+      beforeEach(function() {
+        user.provider = 'facebook';
+      });
+
+      it('should succeed when saving without a password', function() {
+        user.password = null;
+        return user.save().should.be.fulfilled;
+      });
+    });
+
+    describe('given user provider is github', function() {
+      beforeEach(function() {
+        user.provider = 'github';
+      });
+
+      it('should succeed when saving without a password', function() {
+        user.password = null;
+        return user.save().should.be.fulfilled;
+      });
     });
   });
 });

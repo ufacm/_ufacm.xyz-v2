@@ -1,7 +1,7 @@
 'use strict';
 
 var config = browser.params;
-var UserModel = require(config.serverConfig.root + '/server/sqldb').User;
+var UserModel = require(config.serverConfig.root + '/server/api/user/user.model').default;
 
 describe('Login View', function() {
   var page;
@@ -20,7 +20,7 @@ describe('Login View', function() {
 
   before(function() {
     return UserModel
-      .destroy({ where: {} })
+      .remove()
       .then(function() {
         return UserModel.create(testUser);
       })
@@ -28,7 +28,7 @@ describe('Login View', function() {
   });
 
   after(function() {
-    return UserModel.destroy({ where: {} });
+    return UserModel.remove();
   });
 
   it('should include login form with correct inputs and submit button', function() {

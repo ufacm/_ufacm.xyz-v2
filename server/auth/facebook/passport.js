@@ -12,13 +12,13 @@ export function setup(User, config) {
     ]
   },
   function(accessToken, refreshToken, profile, done) {
-    User.find({where: {'facebook.id': profile.id}})
+    User.findOne({'facebook.id': profile.id}).exec()
       .then(user => {
         if(user) {
           return done(null, user);
         }
 
-        user = User.build({
+        user = new User({
           name: profile.displayName,
           email: profile.emails[0].value,
           role: 'user',

@@ -5,16 +5,9 @@
 // ==================================
 module.exports = {
 
-  // Sequelize connection opions
-  sequelize: {
-    uri: 'sqlite://',
-    options: {
-      logging: false,
-      storage: 'dev.sqlite',
-      define: {
-        timestamps: false
-      }
-    }
+  // MongoDB connection options
+  mongo: {
+    uri: 'mongodb://172.17.0.2/ufacmxyzv2-dev'
   },
 
   // Seed database on startup
