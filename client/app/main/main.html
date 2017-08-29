@@ -30,6 +30,20 @@
     </div>
   </div>
 
+  <div class  = "eventStream" ng-app="eventStreamer">
+    <h1 class= "events-header">Upcoming Events:</h1>
+
+    <div ng-controller = "eventStreamController">
+      <span> Values:</span>
+      <button ng-click= "updateValue()">Refresh Events</button>
+      <br><br>
+      {{events}}
+
+    </div>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"> </script>
+    <script src = "/../../server/EventStream/event.stream.js" > </script>
+  </div>
+
   <form class="thing-form">
     <label>Syncs in realtime across clients</label>
     <p class="input-group">
