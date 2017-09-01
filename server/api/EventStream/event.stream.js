@@ -16,19 +16,16 @@ eventStreamer.controller('eventStreamController', function($scope){
   $scope.updateValue = function(){
     $scope.events = events
   };
-
-
 })
-
 
 
 
 class eventStream {
   constructor() {
-    this.returnedEvents = null;
-    getEvents().then((res, rej) => {
+    let this.returnedEvents = null;
+    getEventsOrganized().then((res, rej) => {
       if(res){
-        this.returnedEvents=res;
+           this.
       }
       else{
         console.log("eventStream->Error->trouble with returned events " + rej)
@@ -36,6 +33,36 @@ class eventStream {
     })
   }
 
+getEventsOrganized(){
+     getEvents().then(res,rej){
+          var parsedEvents = [];
+          if(res){
+               for(rawEvent  in res.data){
+               let ID =  res.rawEvent[event].ID;
+               let name =res.rawEvent[event].name;
+               let description = res.rawEvent[event].description;
+               let start_time = res.rawEvent[event].start_time;
+               let end_time = res.rawEvent[event].end_time;
+               let cover = res.rawEvent[event].cover;
+               let place = res.rawEvent[event].place;
+               let event = {
+                    ID: ID,
+                    name: name,
+                    description: description,
+                    start_time: start_time,
+                    end_time: end_time,
+                    cover: cover,
+                    place: place
+               }
+               parsedEvents.push(eventObj);
+          }
+          return resolve(parsedEvents);
+     }
+     if (rej){
+          console.log("Error: Could not get events from api, reject : ", rej);
+          return resolve(rej);
+     }
+}
   getEvents() {
     new Promise(function(resolve, reject) {
       request.get('https://graph.facebook.com/494011427297346/events', function(error, response, events) {
