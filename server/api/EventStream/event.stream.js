@@ -1,22 +1,22 @@
 var request = require('request');
-var eventStreamer = angular.module('eventStreamer')
+var eventStreamer = angular.module('eventStreamer', []);
 
 eventStreamer.controller('eventStreamController', function($scope){
-  eventStream = new eventStream();
-  var events = null;
-  eventStream.getEvents().then((res, rej) => {
-    if(res){
-      events = res.events;
-    }
-    if(rej){
-      console.log("Unable to get events, rejected with reject = "  + rej);
-    }
-
+  // eventStream = new eventStream();
+  // var events = null;
+  // eventStream.getEvents().then((res, rej) => {
+  //   if(res){
+  //     events = res.events;
+  //     console.log("events => " + events);
+  //   }
+  //   if(rej){
+  //     console.log("Unable to get events, rejected with reject = "  + rej);
+  //   }
   }
-  $scope.updateValue = function(){
-    $scope.events = events
-  };
-})
+  $scope.updateValue = function() {
+         $scope.events = "Nelly";
+     }
+});
 
 
 
